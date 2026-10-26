@@ -1,0 +1,15 @@
+{
+  "name": "Sim POC Analyzer",
+  "short_name": "Sim POC",
+  "description": "Point-of-care lab simulator for clinical simulation. Simulation only.",
+  "start_url": "learner.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0e1216",
+  "theme_color": "#20262e",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

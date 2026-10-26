@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#20262e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Sim POC">
+  <title>Sim POC Analyzer</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/learner.css">
+</head>
+<body class="learner">
+  <div class="device" id="device">
+    <div class="device-top">
+      <span class="brand" id="brand">SIM POC ANALYZER</span>
+      <span class="sim-tag">SIMULATION</span>
+    </div>
+
+    <div class="screen" id="screen">
+      <div class="statusbar">
+        <span id="clock">--:--</span>
+        <span class="batt" aria-label="Battery full"><span></span></span>
+      </div>
+
+      <!-- HOME -->
+      <section class="view" id="v-home" aria-labelledby="h-home">
+        <h1 id="h-home" class="v-title">Ready</h1>
+        <p class="v-sub" id="homeMsg">Insert a cartridge to begin a test.</p>
+        <div class="v-actions">
+          <button type="button" class="soft primary" id="btnInsert">Insert Cartridge</button>
+        </div>
+      </section>
+
+      <!-- SCAN -->
+      <section class="view hidden" id="v-scan" aria-labelledby="h-scan">
+        <h1 id="h-scan" class="v-title">Scan Cartridge</h1>
+        <div class="cam">
+          <video id="video" playsinline muted></video>
+          <div class="frame" aria-hidden="true"></div>
+        </div>
+        <p class="v-sub" id="scanMsg" role="status" aria-live="polite">Hold the cartridge code inside the box.</p>
+        <div class="v-actions">
+          <button type="button" class="soft" id="btnCancelScan">Cancel</button>
+        </div>
+      </section>
+
+      <!-- ANALYZING -->
+      <section class="view hidden" id="v-run" aria-labelledby="h-run">
+        <h1 id="h-run" class="v-title">Analyzing</h1>
+        <p class="v-sub" id="runCart"></p>
+        <div class="bar" id="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+             title="Facilitator: triple-tap to skip"><span id="barFill"></span></div>
+        <p class="v-time" id="runTime" aria-live="off">0:00</p>
+        <p class="v-sub small">Do not remove cartridge.</p>
+      </section>
+
+      <!-- RESULTS -->
+      <section class="view hidden" id="v-res" aria-labelledby="h-res">
+        <div class="res-head">
+          <h1 id="h-res" class="v-title sm" tabindex="-1"></h1>
+          <span class="res-meta" id="resMeta"></span>
+        </div>
+        <div class="res-list" id="resList"></div>
+        <p class="res-foot" id="resFoot"></p>
+        <div class="v-actions">
+          <button type="button" class="soft primary" id="btnNew">New Test</button>
+        </div>
+      </section>
+
+      <!-- ERROR -->
+      <section class="view hidden" id="v-err" aria-labelledby="h-err">
+        <h1 id="h-err" class="v-title err" tabindex="-1"></h1>
+        <p class="v-sub" id="errL1"></p>
+        <p class="v-sub strong" id="errL2"></p>
+        <p class="v-code" id="errCode"></p>
+        <div class="v-actions">
+          <button type="button" class="soft primary" id="btnErrOk">OK</button>
+        </div>
+      </section>
+    </div>
+
+    <div class="device-bottom">Teaching values · Not for clinical use</div>
+  </div>
+
+  <script src="js/cartridges.js"></script>
+  <script src="js/ranges.js"></script>
+  <script src="js/calc.js"></script>
+  <script src="lib/jsQR.js" onerror="void 0"></script>
+  <script src="js/scanner.js"></script>
+  <script src="js/learner.js"></script>
+  <script src="js/sw-register.js"></script>
+</body>
+</html>

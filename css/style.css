@@ -1,0 +1,111 @@
+/* Sim POC Analyzer — shared styles. SIMULATION ONLY. */
+:root {
+  --bg: #f4f6f8; --panel: #ffffff; --ink: #1b2430; --muted: #5d6b7a;
+  --line: #d6dde4; --accent: #0b6e8a; --accent-ink: #ffffff;
+  --low: #1f5fbf; --high: #b3261e; --crit-bg: #b3261e; --crit-ink: #ffffff;
+  --warn-bg: #fff4d6; --warn-ink: #6b4a00; --sim: #6a1b9a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #11161c; --panel: #1a222b; --ink: #e6edf3; --muted: #9aa7b4;
+    --line: #2d3946; --accent: #3bb3d4; --accent-ink: #0b141a;
+    --low: #7fb0ff; --high: #ff8a80; --crit-bg: #ff5a4f; --crit-ink: #1a0000;
+    --warn-bg: #3a2e0c; --warn-ink: #ffd76a; --sim: #ce93d8;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg); color: var(--ink); line-height: 1.4;
+}
+a { color: var(--accent); }
+.sim-banner {
+  background: var(--sim); color: #fff; text-align: center;
+  font-weight: 700; font-size: .8rem; letter-spacing: .08em; padding: .35rem;
+}
+@media (prefers-color-scheme: dark) { .sim-banner { color: #1a0a1f; } }
+header.app {
+  display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap;
+  gap: .5rem; padding: .9rem 1.25rem; border-bottom: 1px solid var(--line); background: var(--panel);
+}
+header.app h1 { margin: 0; font-size: 1.25rem; }
+header.app .sub { color: var(--muted); font-size: .9rem; }
+main.op {
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 1rem; padding: 1rem 1.25rem; max-width: 1200px; margin: 0 auto;
+}
+@media (max-width: 860px) { main.op { grid-template-columns: 1fr; } }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1rem;
+}
+.card h2 { margin: 0 0 .75rem; font-size: 1rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.card + .card { margin-top: 1rem; }
+.grid-setup { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: .75rem; }
+label.f { display: flex; flex-direction: column; gap: .25rem; font-size: .85rem; font-weight: 600; }
+select, input[type=number], input[type=text] {
+  font: inherit; font-weight: 400; padding: .45rem .5rem; border-radius: 6px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 100%;
+}
+select:focus, input:focus, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; }
+.hidden { display: none !important; }
+
+table.vals { width: 100%; border-collapse: collapse; font-size: .92rem; }
+table.vals th { text-align: left; color: var(--muted); font-weight: 600; font-size: .78rem;
+  text-transform: uppercase; padding: .35rem .4rem; border-bottom: 1px solid var(--line); }
+table.vals td { padding: .3rem .4rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+table.vals td.an { font-weight: 700; white-space: nowrap; }
+table.vals td.unit, table.vals td.rng { color: var(--muted); white-space: nowrap; font-size: .82rem; }
+table.vals input[type=number] { max-width: 7rem; }
+table.vals tr.calc td.an { font-weight: 600; font-style: italic; }
+.flag { display: inline-block; min-width: 2.2rem; text-align: center; font-weight: 800;
+  border-radius: 4px; padding: 0 .3rem; font-size: .8rem; }
+.flag.L { color: var(--low); } .flag.H { color: var(--high); }
+.flag.LL, .flag.HH { background: var(--crit-bg); color: var(--crit-ink); }
+.flag.out { color: var(--warn-ink); background: var(--warn-bg); }
+
+.btns { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
+button {
+  font: inherit; font-weight: 600; padding: .55rem .9rem; border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--accent); background: var(--panel); color: var(--accent);
+}
+button.primary { background: var(--accent); color: var(--accent-ink); }
+button:disabled { opacity: .5; cursor: not-allowed; }
+
+.warnings { margin: .75rem 0 0; padding: .6rem .8rem; border-radius: 6px;
+  background: var(--warn-bg); color: var(--warn-ink); font-size: .88rem; }
+.warnings ul { margin: .25rem 0 0; padding-left: 1.1rem; }
+
+.qr-wrap { display: flex; flex-direction: column; align-items: center; gap: .5rem; }
+.qr-wrap canvas { background: #fff; padding: 12px; border-radius: 8px; width: 100%; max-width: 320px; height: auto; image-rendering: pixelated; }
+.qr-meta { font-size: .85rem; color: var(--muted); text-align: center; word-break: break-all; }
+.qr-empty { color: var(--muted); font-size: .9rem; text-align: center; padding: 2rem 0; }
+.stale { color: var(--warn-ink); background: var(--warn-bg); padding: .3rem .6rem; border-radius: 6px; font-size: .85rem; }
+.status { min-height: 1.2em; font-size: .85rem; color: var(--muted); }
+.note { font-size: .8rem; color: var(--muted); margin-top: .5rem; }
+
+/* Landing page */
+.landing { max-width: 640px; margin: 2rem auto; padding: 0 1.25rem; }
+.landing .choice { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+@media (max-width: 480px) { .landing .choice { grid-template-columns: 1fr; } }
+.landing a.tile { display: block; text-decoration: none; color: var(--ink); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 10px; padding: 1.25rem; }
+.landing a.tile strong { display: block; font-size: 1.1rem; color: var(--accent); margin-bottom: .25rem; }
+
+/* Printable cartridge label: only the label prints */
+#printLabel { display: none; }
+@media print {
+  body * { visibility: hidden; }
+  #printLabel, #printLabel * { visibility: visible; }
+  #printLabel { display: block; position: absolute; top: 0; left: 0; width: 2.5in;
+    border: 2px dashed #000; padding: .15in; text-align: center; color: #000; font-family: sans-serif; }
+  #printLabel img { width: 2.1in; height: 2.1in; }
+  #printLabel .pl-name { font-size: 16pt; font-weight: 800; }
+  #printLabel .pl-sim { font-size: 7pt; letter-spacing: .05em; }
+}
+table.vals input[type=number] { min-width: 4.75rem; }
+@media (max-width: 520px) {
+  table.vals th:nth-child(3), table.vals td.unit { display: none; }
+  table.vals td, table.vals th { padding: .3rem .25rem; }
+  .flag { min-width: 0; }
+}

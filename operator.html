@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sim POC Analyzer — Operator</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="sim-banner">SIMULATION ONLY — NOT FOR CLINICAL USE — TEACHING VALUES</div>
+  <header class="app">
+    <h1>Sim POC Analyzer · Operator</h1>
+    <span class="sub">Build a cartridge, then the learner scans it.</span>
+  </header>
+
+  <main class="op">
+    <section>
+      <div class="card">
+        <h2>1 · Setup</h2>
+        <div class="grid-setup">
+          <label class="f">Example scenario
+            <select id="scenario"><option value="">— Start blank —</option></select>
+          </label>
+          <label class="f">Cartridge
+            <select id="cart"></select>
+          </label>
+          <label class="f">Age group
+            <select id="age"></select>
+          </label>
+          <label class="f">Sex
+            <select id="sex"><option value="F">Female</option><option value="M">Male</option></select>
+          </label>
+          <label class="f" id="stWrap">Sample type
+            <select id="st"><option value="ART">Arterial</option><option value="VEN">Venous</option></select>
+          </label>
+          <label class="f">Analysis time (sec)
+            <input type="number" id="dl" min="0" max="900" step="5">
+          </label>
+          <label class="f">Error scenario
+            <select id="err"></select>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>2 · Measured values</h2>
+        <table class="vals">
+          <thead><tr><th>Analyte</th><th>Value</th><th>Unit</th><th>Range</th><th>Flag</th><th title="Show *** on learner screen">***</th></tr></thead>
+          <tbody id="measuredBody"></tbody>
+        </table>
+        <div id="warnings" class="warnings hidden" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="card" id="calcCard">
+        <h2>3 · Calculated (automatic)</h2>
+        <table class="vals">
+          <thead><tr><th>Analyte</th><th>Value</th><th>Unit</th><th>Range</th><th>Flag</th></tr></thead>
+          <tbody id="calcBody"></tbody>
+        </table>
+        <p class="note">Calculated from the measured values the same way an analyzer would. Edit the measured values to change these.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="card">
+        <h2>4 · Cartridge QR code</h2>
+        <div class="qr-wrap">
+          <div id="qrEmpty" class="qr-empty">Press <strong>Generate cartridge</strong> to create a QR code.</div>
+          <canvas id="qr" class="hidden" width="10" height="10" aria-label="Cartridge QR code"></canvas>
+          <div id="stale" class="stale hidden" role="status">Values changed — regenerate the cartridge.</div>
+          <div id="qrMeta" class="qr-meta"></div>
+        </div>
+        <label class="f" style="margin-top:.75rem;font-weight:400">
+          <span><input type="checkbox" id="incUrl" checked> Include learner page link (lets a phone camera open it directly)</span>
+        </label>
+        <div class="btns">
+          <button type="button" class="primary" id="gen">Generate cartridge</button>
+          <button type="button" id="print" disabled>Print label</button>
+          <button type="button" id="copy" disabled>Copy link</button>
+          <button type="button" id="open" disabled>Open learner view</button>
+        </div>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+        <p class="note">The QR code holds only the results. Nothing is sent to a server.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="printLabel" aria-hidden="true">
+    <div class="pl-name" id="plName"></div>
+    <img id="plImg" alt="">
+    <div class="pl-sim">SIM POC ANALYZER · SIMULATION ONLY</div>
+  </div>
+
+  <script src="lib/qrcode.js"></script>
+  <script src="js/cartridges.js"></script>
+  <script src="js/ranges.js"></script>
+  <script src="js/calc.js"></script>
+  <script src="js/scenarios.js"></script>
+  <script src="js/operator.js"></script>
+  <script src="js/sw-register.js"></script>
+</body>
+</html>
